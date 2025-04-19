@@ -1,18 +1,31 @@
 import httpx
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
 
 
-def get_race_shutuba_html(race_id: str) -> bytes:
-    with httpx.Client() as client:
-        response = client.get(
-            "https://race.netkeiba.com/race/shutuba.html",
-            params={
-                "race_id": race_id,
-            },
-        )
-        if response.status_code != httpx.codes.OK:
-            raise Exception(f"Failed to fetch data: {response.status_code}")
+def get_race_shutuba_html(race_id: str) -> str:
+    options = webdriver.ChromeOptions()
+    options.add_argument("--headless")
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
+    driver = webdriver.Remote(command_executor="http://selenium:4444/wd/hub", options=options)
 
-        return response.content
+    try:
+        url = f"https://race.netkeiba.com/race/shutuba.html?race_id={race_id}"
+        driver.get(url)
+
+        # ページが完全に読み込まれるのを待つ
+        wait = WebDriverWait(driver, 10)
+        wait.until(EC.presence_of_element_located((By.TAG_NAME, "body")))
+
+        # HTMLコンテンツを取得
+        html_content = driver.page_source
+
+        return html_content
+    finally:
+        driver.quit()
 
 
 def get_race_result_html(race_id: str) -> bytes:

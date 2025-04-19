@@ -3,7 +3,9 @@
 {
   "name": "yamamoto-estate-manager",
   // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-  "image": "mcr.microsoft.com/devcontainers/base:jammy",
+  "dockerComposeFile": "./compose.yaml",
+  "service": "devcontainer",
+  "workspaceFolder": "/workspaces/mcp-tutorial",
   // Features to add to the dev container. More info: https://containers.dev/features.
   "features": {
     "ghcr.io/devcontainers/features/docker-in-docker:2": {

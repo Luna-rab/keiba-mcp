@@ -18,10 +18,11 @@ class RaceShutubaItem(BaseModel):
     num: int = Field(..., description="馬番")
     horse: "HorseProfilePicked" = Field(..., description="馬情報")
     sex_age: str = Field(..., description="性齢")
-    weight: str = Field(..., description="斤量")
+    impost_weight: str = Field(..., description="斤量")
     jockey: "JockeyInfoPicked" = Field(..., description="騎手情報")
-    odds: float = Field(..., description="オッズ")
-    pop: int = Field(..., description="人気")
+    horse_weight: str = Field(..., description="馬体重")
+    odds: str = Field(..., description="オッズ")
+    pop: str = Field(..., description="人気")
 
 
 class RaceResult(BaseModel):
