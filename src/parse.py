@@ -10,7 +10,7 @@ from src.models import (
 )
 
 
-def parse_shutuba(html: bytes) -> RaceShutuba:
+def parse_shutuba(html: str) -> RaceShutuba:
     """
     netkeibaの出馬表ページをパースする
 
@@ -29,6 +29,12 @@ def parse_shutuba(html: bytes) -> RaceShutuba:
         r"^(.+?) 出馬表 \| (\d{4}年\d{1,2}月\d{1,2}日) (.+?\d+R) レース情報\(JRA\) - netkeiba",
         title_element.get_text() if title_element is not None else "",
     )
+    # titleをパースし、インデックスが存在しない場合はデフォルトで空文字列を設定
+    title_parts = match.groups() if match else []
+    race_name = title_parts[0].strip() if len(title_parts) > 0 else ""
+    date = title_parts[1].strip() if len(title_parts) > 1 else ""
+    place = title_parts[2].strip() if len(title_parts) > 2 else ""
+
     race_name, date, place = match.groups() if match else ("", "", "")
 
     # レースIDを取得
@@ -44,9 +50,13 @@ def parse_shutuba(html: bytes) -> RaceShutuba:
         "#page > div.RaceColumn01 > div > div.RaceMainColumn > div.RaceList_NameBox > div.RaceList_Item02 > div.RaceData01"
     )
     raceinfo_text = raceinfo_element.get_text() if raceinfo_element is not None else ""
-    time, course, weather, condition = (
-        [t.strip() for t in raceinfo_text.split("/")] if raceinfo_text else ("", "", "", "")
-    )
+
+    # レース情報のフィールドをパースし、インデックスが存在しない場合はデフォルトで空文字列を設定
+    raceinfo_parts = raceinfo_text.split("/") if raceinfo_text else []
+    time = raceinfo_parts[0].strip() if len(raceinfo_parts) > 0 else ""
+    course = raceinfo_parts[1].strip() if len(raceinfo_parts) > 1 else ""
+    weather = raceinfo_parts[2].strip() if len(raceinfo_parts) > 2 else ""
+    condition = raceinfo_parts[3].strip() if len(raceinfo_parts) > 3 else ""
 
     return RaceShutuba(
         race_name=race_name,

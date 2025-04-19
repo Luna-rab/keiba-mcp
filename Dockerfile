@@ -18,11 +18,11 @@ COPY --from=builder /build/requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
 # アプリケーションコードをコピー
-COPY weather.py ./
+COPY src/ ./src/
 
 # 実行ユーザーを設定 (セキュリティのため)
 RUN useradd -m mcpuser
 USER mcpuser
 
 # MCPサーバーを実行 (コンテナ組み込みのpythonを使用)
-CMD ["python", "weather.py"]
+CMD ["python", "-m", "src"]

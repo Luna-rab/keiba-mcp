@@ -1,0 +1,10 @@
+services:
+  keiba-mcp:
+    build: .
+    container_name: keiba-mcp
+    stdin_open: true
+    tty: true
+    network_mode: service:selenium
+
+  selenium:
+    image: selenium/standalone-chromium
