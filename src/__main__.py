@@ -1,7 +1,9 @@
 from mcp.server.fastmcp import FastMCP
 
 from src.clients import get_horse_profile_html, get_race_result_html, get_race_shutuba_html
-from src.parse import parse_horse_profile, parse_race_result, parse_shutuba
+from src.parse.parse_horse import parse_horse_profile
+from src.parse.parse_race import parse_race_result
+from src.parse.parse_shutuba import parse_shutuba
 
 # Initialize FastMCP server
 mcp = FastMCP("weather")
