@@ -106,12 +106,12 @@ class JockeyInfo(BaseModel):
     jockey_id: str = Field(..., description="騎手ID")
     height_weight: str = Field(..., description="身長(cm)/体重(kg)")
     debut_year: str = Field(..., description="デビュー年")
-    current_year_wins_central: str = Field(..., description="本年勝利数")
-    total_wins_central: str = Field(..., description="通算勝利数")
-    current_year_prize_central: str = Field(..., description="本年獲得賞金(円)")
-    total_prize_central: str = Field(..., description="通算獲得賞金(円)")
-    g1_wins_central: str = Field(..., description="GI勝利数")
-    stakes_wins_central: str = Field(..., description="重賞勝利数")
+    current_year_wins: str = Field(..., description="本年勝利数")
+    total_wins: str = Field(..., description="通算勝利数")
+    current_year_prize: str = Field(..., description="本年獲得賞金(円)")
+    total_prize: str = Field(..., description="通算獲得賞金(円)")
+    g1_wins: str = Field(..., description="GI勝利数")
+    stakes_wins: str = Field(..., description="重賞勝利数")
 
 
 class JockeyInfoPicked(BaseModel):
