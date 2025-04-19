@@ -14,8 +14,8 @@ class RaceShutuba(BaseModel):
 
 
 class RaceShutubaItem(BaseModel):
-    waku: int = Field(..., description="枠")
-    num: int = Field(..., description="馬番")
+    waku: str = Field(..., description="枠")
+    num: str = Field(..., description="馬番")
     horse: "HorseProfilePicked" = Field(..., description="馬情報")
     sex_age: str = Field(..., description="性齢")
     impost_weight: str = Field(..., description="斤量")
@@ -31,7 +31,6 @@ class RaceResult(BaseModel):
     date: str = Field(..., description="日付")
     time: str = Field(..., description="発走時刻")
     place: str = Field(..., description="開催場所")
-    distance: str = Field(..., description="距離")
     course: str = Field(..., description="コース")
     weather: str = Field(..., description="天候")
     condition: str = Field(..., description="馬場状態")
@@ -44,17 +43,17 @@ class RaceResultPicked(BaseModel):
 
 
 class RaceResultItem(BaseModel):
-    rank: int = Field(..., description="着順")
-    waku: int = Field(..., description="枠")
-    num: int = Field(..., description="馬番")
+    rank: str = Field(..., description="着順")
+    waku: str = Field(..., description="枠")
+    num: str = Field(..., description="馬番")
     horse: "HorseProfilePicked" = Field(..., description="馬情報")
     sex_age: str = Field(..., description="性齢")
-    weight: str = Field(..., description="斤量")
+    impost_weight: str = Field(..., description="斤量")
     jockey: "JockeyInfoPicked" = Field(..., description="騎手情報")
     time: str = Field(..., description="タイム")
     margin: str = Field(..., description="着差")
-    odds: float = Field(..., description="オッズ")
-    pop: int = Field(..., description="人気")
+    odds: str = Field(..., description="オッズ")
+    pop: str = Field(..., description="人気")
     horse_weight: str = Field(..., description="馬体重")
 
 
