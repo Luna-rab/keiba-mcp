@@ -50,28 +50,6 @@ async def get_horse_profile_html(horse_id: str) -> bytes:
         return response.content
 
 
-async def get_horse_result_html(horse_id: str) -> bytes:
-    with httpx.Client() as client:
-        response = client.get(
-            f"https://db.netkeiba.com/horse/result/{horse_id}",
-        )
-        if response.status_code != httpx.codes.OK:
-            raise Exception(f"Failed to fetch data: {response.status_code}")
-
-        return response.content
-
-
-async def get_horse_ped_html(horse_id: str) -> bytes:
-    with httpx.Client() as client:
-        response = client.get(
-            f"https://db.netkeiba.com/horse/ped/{horse_id}",
-        )
-        if response.status_code != httpx.codes.OK:
-            raise Exception(f"Failed to fetch data: {response.status_code}")
-
-        return response.content
-
-
 async def get_jockey_profile_html(jockey_id: str) -> bytes:
     with httpx.Client() as client:
         response = client.get(
