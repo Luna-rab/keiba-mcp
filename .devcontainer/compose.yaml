@@ -4,7 +4,7 @@ services:
     network_mode: service:selenium
     command: sleep infinity
     volumes:
-      - ..:/workspaces/mcp-tutorial:cached
+      - ..:/workspaces/keiba-mcp:cached
 
   selenium:
     image: selenium/standalone-chromium
